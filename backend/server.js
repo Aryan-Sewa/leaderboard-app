@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -5,7 +7,8 @@ const cors = require('cors');
 const app = express();
 const PORT = 5000;
 
-mongoose.connect('mongodb://localhost:27017/leaderboard');
+mongoose.connect(process.env.MONGODB_URI);
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => console.log('MongoDB connected'));
